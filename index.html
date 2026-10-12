@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Marty AI Predictor | Cameroun 🇨🇲</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#0a101d',
+                            card: '#121a2a',
+                            input: '#0e1524',
+                            border: '#1c283f',
+                            accent: '#1e2b45'
+                        },
+                        neon: {
+                            green: '#20e382',
+                            cyan: '#00d2ff',
+                            amber: '#fbbf24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #070d18;
+            color: #f1f5f9;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .card-container {
+            background-color: #111827;
+            border: 1px solid #1f293d;
+        }
+
+        .neon-border-active {
+            border: 2px solid #20e382 !important;
+            box-shadow: 0 0 16px rgba(32, 227, 130, 0.22), inset 0 0 8px rgba(32, 227, 130, 0.12);
+        }
+
+        .neon-text-green {
+            color: #20e382;
+            text-shadow: 0 0 20px rgba(32, 227, 130, 0.6);
+        }
+
+        .badge-pill {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        .badge-cyan {
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #06b6d4;
+        }
+
+        .btn-gradient-launch {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+
+        .btn-gradient-launch:hover {
+            background: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+        }
+
+        .btn-telegram:hover {
+            background: #0077b5;
+        }
+
+        .btn-yellow-signal {
+            background: #ffb703;
+            color: #000000;
+        }
+
+        .btn-yellow-signal:hover {
+            background: #ffa700;
+        }
+
+        /* Custom Scrollbar for Terminal */
+        .terminal-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-box::-webkit-scrollbar-thumb {
+            background: #1c283f;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-3 sm:p-6">
+
+    <div class="w-full max-w-md mx-auto flex flex-col gap-4">
+
+        <!-- Header Screen matching Screenshot EXACTLY -->
+        <header class="card-container rounded-2xl p-4 sm:p-5 flex flex-col gap-3 relative overflow-hidden shadow-xl">
+            <!-- Top Badges Row -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="badge-pill px-2.5 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-halved text-xs"></i> Sécurité 100%
+                    </span>
+                    <span class="badge-cyan px-2.5 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-gear text-xs"></i> Système IA v4.2
+                    </span>
+                </div>
+                <span class="text-xl" title="Cameroun">🇨🇲</span>
+            </div>
+
+            <!-- Title Header -->
+            <div class="mt-1">
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                    Marty <span class="text-emerald-400">AI</span> Predictor
+                </h1>
+                <p class="text-xs text-slate-400 mt-1 font-medium flex items-center gap-1.5">
+                    <span>Algorithme prédictif haute précision</span>
+                    <span>•</span>
+                    <span class="text-emerald-400 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-bolt text-[10px]"></i> Temps réel
+                    </span>
+                </p>
+            </div>
+
+            <!-- Profile / Account ID Bar -->
+            <div class="flex items-center justify-between pt-2.5 border-t border-slate-800 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-black text-xs flex items-center justify-center">
+                        M
+                    </div>
+                    <span class="font-bold text-white">Marty Official CM</span>
+                </div>
+                <span class="font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded text-[11px] border border-slate-800">
+                    ID: #9942-CHR
+                </span>
+            </div>
+        </header>
+
+        <section class="flex flex-col gap-2.5">
+            <h2 class="text-center font-extrabold text-white text-xl tracking-wide my-1">
+                Choisissez un jeu
+            </h2>
+
+            <div class="grid grid-cols-2 gap-3" id="gameGrid">
+                
+                <!-- Aviator Card (Active by default) -->
+                <button onclick="selectGame('Aviator', this)" data-game="Aviator" class="game-card neon-border-active card-container p-3.5 rounded-2xl flex flex-col justify-between text-left relative transition-all duration-200 cursor-pointer">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-950/60 border border-red-500/30 text-red-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                        <span class="active-tag px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/40 bg-emerald-500/20 text-emerald-400">ACTIF</span>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-sm text-white">Aviator</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5 font-mono">
+                            Précision: <span class="text-emerald-400 font-bold">98.7%</span>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Mines Card -->
+                <button onclick="selectGame('Mines', this)" data-game="Mines" class="game-card card-container p-3.5 rounded-2xl flex flex-col justify-between text-left relative transition-all duration-200 cursor-pointer border border-slate-800 hover:border-slate-700">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-950/60 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-bomb"></i>
+                        </div>
+                        <span class="active-tag hidden px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/40 bg-emerald-500/20 text-emerald-400">ACTIF</span>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-sm text-white">Mines</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5 font-mono">
+                            Précision: <span class="text-amber-400 font-bold">98.2%</span>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Apple of Fortune Card -->
+                <button onclick="selectGame('Apple of Fortune', this)" data-game="Apple of Fortune" class="game-card card-container p-3.5 rounded-2xl flex flex-col justify-between text-left relative transition-all duration-200 cursor-pointer border border-slate-800 hover:border-slate-700">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-apple-whole"></i>
+                        </div>
+                        <span class="active-tag hidden px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/40 bg-emerald-500/20 text-emerald-400">ACTIF</span>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-sm text-white">Apple of Fortune</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5 font-mono">
+                            Précision: <span class="text-emerald-400 font-bold">97.9%</span>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Penalty Shoot-Out Card -->
+                <button onclick="selectGame('Penalty Shoot-Out', this)" data-game="Penalty Shoot-Out" class="game-card card-container p-3.5 rounded-2xl flex flex-col justify-between text-left relative transition-all duration-200 cursor-pointer border border-slate-800 hover:border-slate-700">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+                        <span class="active-tag hidden px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/40 bg-emerald-500/20 text-emerald-400">ACTIF</span>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-sm text-white">Penalty Shoot-Out</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5 font-mono">
+                            Précision: <span class="text-cyan-400 font-bold">97.5%</span>
+                        </div>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- Full Width Card: Chicken Road -->
+            <button onclick="selectGame('Chicken Road', this)" data-game="Chicken Road" class="game-card card-container p-3.5 rounded-2xl flex items-center justify-between text-left relative transition-all duration-200 cursor-pointer border border-slate-800 hover:border-slate-700">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-500/30 text-purple-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-[#000]"></i>
+                        <i class="fa-solid fa-drumstick-bite"></i>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-sm text-white">Chicken Road</div>
+                        <div class="text-[11px] text-slate-400 font-mono">
+                            Précision IA: <span class="text-purple-400 font-bold">96.8%</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="active-tag hidden px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/40 bg-emerald-500/20 text-emerald-400">ACTIF</span>
+            </button>
+        </section>
+
+        <section class="card-container rounded-2xl p-4 flex flex-col gap-3">
+            <div class="flex flex-col gap-1.5">
+                <label for="accountInput" class="text-xs font-bold text-slate-300">
+                    Numéro de compte 1xBet Cameroun
+                </label>
+                <input type="number" id="accountInput" value="3472923213" placeholder="Ex: 3472923213" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-sm tracking-wider focus:outline-none focus:border-emerald-500 transition-colors">
+            </div>
+
+            <!-- Main Launch Analysis Button -->
+            <button onclick="handleLaunchAnalysis()" class="w-full py-4 px-6 rounded-xl btn-gradient-launch text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1">
+                <i class="fa-solid fa-bolt text-base"></i> Lancer l'analyse IA
+            </button>
+
+            <!-- Telegram Support Button -->
+            <a href="https://t.me/Marty_CFA_bot" target="_blank" class="w-full py-3 px-4 rounded-xl btn-telegram text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
+                <i class="fa-brands fa-telegram text-base"></i> Telegram Support
+            </a>
+        </section>
+
+        <div id="analysisResultSection" class="hidden flex-col gap-4 animate-fadeIn">
+            <div class="card-container rounded-2xl p-5 border-2 border-emerald-500/80 flex flex-col items-center text-center relative overflow-hidden shadow-2xl">
+                
+                <!-- Predictor Badge Header -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-emerald-500/40 text-emerald-400 font-mono text-xs font-extrabold mb-3 tracking-wide">
+                    <span id="activeGamePredictorTitle">AVIATOR AI PREDICTOR</span>
+                </div>
+
+                <div class="text-[11px] font-bold text-slate-400 tracking-widest uppercase mt-1">
+                    COEFFICIENT GARANTI
+                </div>
+
+                <!-- Main Coefficient Display -->
+                <div id="coefficientOutput" class="text-5xl sm:text-6xl font-black font-mono neon-text-green tracking-tight my-2">
+                    x23.70
+                </div>
+
+                <!-- Subtext Auto Cashout -->
+                <div class="text-xs text-amber-400 font-mono font-semibold flex items-center gap-1.5 mb-4">
+                    <span>✈️ Retrait automatique recommandé à <span id="autoCashoutOutput">x21.33</span></span>
+                </div>
+
+                <!-- Yellow Signal Button -->
+                <button onclick="getNewSignal()" class="w-full py-3.5 px-4 rounded-xl btn-yellow-signal font-black text-xs uppercase tracking-wider shadow-md active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer mb-4">
+                    <i class="fa-solid fa-arrows-rotate text-sm"></i> OBTENIR UN AUTRE SIGNAL
+                </button>
+
+                <!-- Terminal Diagnostic Logs Box -->
+                <div class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-left font-mono text-[11px] text-slate-300 flex flex-col gap-1.5 terminal-box max-h-40 overflow-y-auto" id="terminalLogContainer">
+                    <div class="text-slate-400">&gt; Initialisation de l'analyse de trajectoire...</div>
+                    <div class="text-slate-400">&gt; Calcul de la variance et des données historiques...</div>
+                    <div class="text-slate-400">&gt; Connexion au serveur 1xBet Cameroun (Douala)...</div>
+                    <div class="text-emerald-400 font-bold">&gt; 🍏 SUCCÈS : Signal garanti à 98.7% généré !</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Live Badge Info Bar -->
+        <div class="flex items-center justify-between px-2 text-xs font-mono text-slate-500">
+            <span>🕒 <span id="liveClock">05:00</span></span>
+            <span class="text-emerald-500 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live
+            </span>
+        </div>
+
+    </div>
+
+    <div id="depositModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm hidden">
+        <div class="card-container rounded-3xl border-2 border-emerald-500/60 max-w-sm w-full p-5 sm:p-6 text-center shadow-2xl relative flex flex-col gap-4 animate-fadeIn">
+            
+            <!-- Close Modal -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Warning Header Icon -->
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center mx-auto text-2xl shadow-inner">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-extrabold text-white mb-1.5">
+                    ⚠️ Dépôt Requis (1500 CFA)
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed text-left bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    Pour synchroniser le robot <span class="text-emerald-400 font-bold">Marty AI Predictor</span> avec votre compte 1xBet Cameroun (<span id="modalAccountId" class="text-white font-mono font-bold">3472923213</span>) et générer des signaux d'une précision de <span class="text-amber-400 font-bold">98.7%</span>, un dépôt minimum de <span class="text-emerald-400 font-black">1500 CFA</span> est obligatoire sur votre compte de jeu.
+                </p>
+            </div>
+
+            <!-- CTA Action Buttons -->
+            <div class="flex flex-col gap-2.5 mt-1">
+                <button onclick="executeDepositRedirect()" class="w-full py-3.5 px-4 rounded-xl btn-gradient-launch text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-wallet"></i> Faire un dépôt (1500 CFA)
+                </button>
+
+                <button onclick="confirmDepositAndShowPrediction()" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-circle-check"></i> J'ai déjà déposé (Continuer)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSelectedGame = 'Aviator';
+        let isDepositConfirmed = false;
+
+        // 1. Select Game Handler
+        function selectGame(gameName, element) {
+            currentSelectedGame = gameName;
+
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                card.classList.remove('neon-border-active');
+                card.classList.add('border-slate-800');
+                const tag = card.querySelector('.active-tag');
+                if (tag) tag.classList.add('hidden');
+            });
+
+            element.classList.remove('border-slate-800');
+            element.classList.add('neon-border-active');
+            
+            const activeTag = element.querySelector('.active-tag');
+            if (activeTag) activeTag.classList.remove('hidden');
+
+            document.getElementById('activeGamePredictorTitle').innerText = `${gameName.toUpperCase()} AI PREDICTOR`;
+
+            if (isDepositConfirmed) {
+                generatePredictionOutput();
+            }
+        }
+
+        // 2. Launch Analysis Handler (Opens Required Modal)
+        function handleLaunchAnalysis() {
+            const accNum = document.getElementById('accountInput').value.trim();
+
+            if (!accNum) {
+                alert("Veuillez entrer votre numéro de compte 1xBet Cameroun !");
+                return;
+            }
+
+            document.getElementById('modalAccountId').innerText = accNum;
+            document.getElementById('depositModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('depositModal').classList.add('hidden');
+        }
+
+        function executeDepositRedirect() {
+            // Simulated redirection to deposit or registration link
+            alert("Redirection vers la page de dépôt 1500 CFA...");
+            closeModal();
+            unlockPredictionScreen();
+        }
+
+        function confirmDepositAndShowPrediction() {
+            closeModal();
+            unlockPredictionScreen();
+        }
+
+        // 3. Unlock & Render Prediction Screen
+        function unlockPredictionScreen() {
+            isDepositConfirmed = true;
+            const resSection = document.getElementById('analysisResultSection');
+            resSection.classList.remove('hidden');
+            resSection.classList.add('flex');
+            
+            generatePredictionOutput();
+            resSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. Generate Signal Output Function
+        function generatePredictionOutput() {
+            const coefEl = document.getElementById('coefficientOutput');
+            const autoEl = document.getElementById('autoCashoutOutput');
+
+            let randomMultiplier;
+            if (currentSelectedGame === 'Aviator') {
+                randomMultiplier = (Math.random() * 22 + 2.5).toFixed(2);
+            } else {
+                randomMultiplier = (Math.random() * 15 + 1.8).toFixed(2);
+            }
+
+            coefEl.innerText = `x${randomMultiplier}`;
+            autoEl.innerText = `x${(randomMultiplier * 0.9).toFixed(2)}`;
+
+            appendTerminalLogs();
+        }
+
+        function getNewSignal() {
+            generatePredictionOutput();
+        }
+
+        // 5. Terminal Logs Generator
+        function appendTerminalLogs() {
+            const container = document.getElementById('terminalLogContainer');
+            container.innerHTML = `
+                <div class="text-slate-400">&gt; Initialisation de l'analyse de trajectoire...</div>
+                <div class="text-slate-400">&gt; Calcul de la variance et des données historiques...</div>
+                <div class="text-slate-400">&gt; Connexion au serveur 1xBet Cameroun (Douala)...</div>
+                <div class="text-emerald-400 font-bold">&gt; 🍏 SUCCÈS : Signal garanti à 98.7% généré !</div>
+            `;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Live Clock Timer
+        setInterval(() => {
+            const now = new Date();
+            const mins = String(now.getMinutes()).padStart(2, '0');
+            const secs = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveClock').innerText = `${mins}:${secs}`;
+        }, 1000);
+    </script>
+</body>
+</html>
