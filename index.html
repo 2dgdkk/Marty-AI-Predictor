@@ -54,7 +54,7 @@
       margin: 0 auto;
     }
 
-    /* --- HEADER --- */
+    /* --- HEADER CARD --- */
     .header-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -333,110 +333,14 @@
       text-decoration: none;
     }
 
-    /* --- PREDICTOR RESULT DISPLAY --- */
-    .result-card {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-green);
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(0, 230, 118, 0.15);
-      display: none;
-      flex-direction: column;
-      gap: 16px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .result-badge {
-      align-self: center;
-      background: rgba(0, 230, 118, 0.1);
-      border: 1px solid var(--accent-green);
-      color: var(--accent-green);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 20px;
-      text-transform: uppercase;
-    }
-
-    .result-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--accent-green);
-      text-shadow: 0 0 20px var(--accent-green-glow);
-      line-height: 1;
-      margin: 8px 0;
-    }
-
-    .result-note {
-      font-size: 13px;
-      color: var(--accent-orange);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-orange {
-      width: 100%;
-      background: var(--accent-orange);
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #000;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
-    }
-
-    .terminal-box {
-      background: #060a12;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      text-align: left;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 140px;
-      overflow-y: auto;
-    }
-
-    .terminal-line {
-      display: flex;
-      gap: 6px;
-    }
-
-    .terminal-line.success {
-      color: var(--accent-green);
-      font-weight: 700;
-    }
-
-    /* --- MODAL (1500 CFA DEPOSIT ALERT) --- */
+    /* --- MODAL (1500 CFA DEPOSIT MANDATORY) --- */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 10, 20, 0.85);
+      background: rgba(5, 10, 20, 0.88);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
@@ -490,33 +394,37 @@
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
       color: var(--accent-green);
-      font-size: 16px;
+      font-size: 15px;
+      white-space: nowrap;
       background: rgba(0, 230, 118, 0.1);
       padding: 2px 8px;
       border-radius: 6px;
+      display: inline-block;
     }
 
     .modal-btn-deposit {
+      width: 100%;
       background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
       border: none;
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 14px;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: #fff;
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(255, 152, 0, 0.35);
+      transition: transform 0.1s ease;
+      text-decoration: none;
+      display: block;
     }
 
-    .modal-btn-close {
-      background: transparent;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
+    .modal-btn-deposit:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -552,7 +460,7 @@
     
     <div class="games-grid">
       <!-- Aviator -->
-      <div class="game-card active" onclick="selectGame(this, 'Aviator', '98.7%')">
+      <div class="game-card active" onclick="selectGame(this)">
         <div class="game-header">
           <div class="game-icon-box icon-aviator">✈️</div>
           <div class="actif-badge">ACTIF</div>
@@ -562,7 +470,7 @@
       </div>
 
       <!-- Mines -->
-      <div class="game-card" onclick="selectGame(this, 'Mines', '98.2%')">
+      <div class="game-card" onclick="selectGame(this)">
         <div class="game-header">
           <div class="game-icon-box icon-mines">💣</div>
         </div>
@@ -571,7 +479,7 @@
       </div>
 
       <!-- Apple of Fortune -->
-      <div class="game-card" onclick="selectGame(this, 'Apple of Fortune', '97.9%')">
+      <div class="game-card" onclick="selectGame(this)">
         <div class="game-header">
           <div class="game-icon-box icon-apple">🍏</div>
         </div>
@@ -580,7 +488,7 @@
       </div>
 
       <!-- Penalty Shoot-Out -->
-      <div class="game-card" onclick="selectGame(this, 'Penalty Shoot-Out', '97.5%')">
+      <div class="game-card" onclick="selectGame(this)">
         <div class="game-header">
           <div class="game-icon-box icon-penalty">⚽</div>
         </div>
@@ -589,7 +497,7 @@
       </div>
 
       <!-- Chicken Road -->
-      <div class="game-card full-width" onclick="selectGame(this, 'Chicken Road', '96.8%')">
+      <div class="game-card full-width" onclick="selectGame(this)">
         <div class="game-header">
           <div class="game-icon-box icon-chicken">🍗</div>
         </div>
@@ -598,7 +506,7 @@
       </div>
     </div>
 
-    <!-- ACCOUNT NUMBER INPUT -->
+    <!-- ACCOUNT INPUT -->
     <div class="input-group">
       <div class="input-label">Numéro de compte 1xBet Cameroun</div>
       <input type="number" id="accountId" class="input-field" placeholder="Ex: 3472923213" value="3472923213">
@@ -614,55 +522,27 @@
       ✈️ Telegram Support
     </a>
 
-    <!-- RESULT DISPLAY CARD -->
-    <div class="result-card" id="resultCard">
-      <div class="result-badge" id="resultTitle">AVIATOR AI PREDICTOR</div>
-      <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">COEFFICIENT GARANTI</div>
-      <div class="result-value" id="coeffValue">x23.70</div>
-      <div class="result-note">
-        ✈️ Retrait automatique recommandé à <span id="cashoutValue">x21.33</span>
-      </div>
-
-      <button class="btn-orange" onclick="handleStartAnalysis()">
-        🔄 OBTENIR UN AUTRE SIGNAL
-      </button>
-
-      <div class="terminal-box" id="terminalLogs">
-        <div class="terminal-line">&gt; Initialisation de l'analyse de trajectoire...</div>
-        <div class="terminal-line">&gt; Calcul de la variance et des données historiques...</div>
-        <div class="terminal-line">&gt; Connexion au serveur 1xBet Cameroun (Douala)...</div>
-        <div class="terminal-line success">✔ SUCCÈS : Signal garanti à 98.7% généré !</div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- MODAL DIALOG (1500 CFA DEPOSIT REQUIRED) -->
+  <!-- MODAL DIALOG (STRICT 1500 CFA DEPOSIT MANDATORY) -->
   <div class="modal-overlay" id="depositModal">
     <div class="modal-card">
       <div class="modal-icon">⚠️</div>
       <div class="modal-title">Dépôt Requis (1500 CFA)</div>
       <div class="modal-text">
-        Pour synchroniser l'algorithme <b>Marty AI Predictor</b> avec votre compte 1xBet Cameroun et garantir la précision du signal, un dépôt minimum de <span class="deposit-amount">1500 CFA</span> est nécessaire sur votre compte.
+        Pour synchroniser le robot Marty AI Predictor avec votre compte 1xBet Cameroun et générer les signaux, un dépôt minimum de <span class="deposit-amount">1500 CFA</span> est obligatoire sur votre compte.
       </div>
-      <button class="modal-btn-deposit" onclick="proceedToSignal()">
+      <!-- SINGLE MANDATORY BUTTON -->
+      <button class="modal-btn-deposit" onclick="redirectToDeposit()">
         Faire un dépôt (1500 CFA)
-      </button>
-      <button class="modal-btn-close" onclick="closeModal()">
-        J'ai déjà déposé (Continuer)
       </button>
     </div>
   </div>
 
   <script>
-    let selectedGameName = 'Aviator';
-    let selectedPrecision = '98.7%';
-
-    function selectGame(element, name, precision) {
+    function selectGame(element) {
       document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active'));
       element.classList.add('active');
-      selectedGameName = name;
-      selectedPrecision = precision;
     }
 
     function handleStartAnalysis() {
@@ -671,45 +551,13 @@
         alert("Veuillez saisir votre numéro de compte 1xBet !");
         return;
       }
-      // Open the 1500 CFA Deposit Modal Notification
+      // Shows ONLY the 1500 CFA deposit notification modal
       document.getElementById('depositModal').style.display = 'flex';
     }
 
-    function closeModal() {
-      document.getElementById('depositModal').style.display = 'none';
-      generateSignal();
-    }
-
-    function proceedToSignal() {
-      document.getElementById('depositModal').style.display = 'none';
-      generateSignal();
-    }
-
-    function generateSignal() {
-      const resultCard = document.getElementById('resultCard');
-      const resultTitle = document.getElementById('resultTitle');
-      const coeffValue = document.getElementById('coeffValue');
-      const cashoutValue = document.getElementById('cashoutValue');
-      const terminalLogs = document.getElementById('terminalLogs');
-
-      resultTitle.innerText = `${selectedGameName.toUpperCase()} AI PREDICTOR`;
-      
-      // Generate realistic dynamic multipliers
-      const randomCoeff = (Math.random() * (35 - 8) + 8).toFixed(2);
-      const recommendedCashout = (randomCoeff * 0.9).toFixed(2);
-
-      coeffValue.innerText = `x${randomCoeff}`;
-      cashoutValue.innerText = `x${recommendedCashout}`;
-
-      terminalLogs.innerHTML = `
-        <div class="terminal-line">&gt; Initialisation de l'analyse de trajectoire...</div>
-        <div class="terminal-line">&gt; Calcul de la variance et des données historiques...</div>
-        <div class="terminal-line">&gt; Connexion au serveur 1xBet Cameroun (Douala)...</div>
-        <div class="terminal-line success">✔ SUCCÈS : Signal garanti à ${selectedPrecision} généré !</div>
-      `;
-
-      resultCard.style.display = 'flex';
-      resultCard.scrollIntoView({ behavior: 'smooth' });
+    function redirectToDeposit() {
+      // Put your deposit / registration link here
+      window.location.href = "https://1xbet.cm";
     }
   </script>
 </body>
