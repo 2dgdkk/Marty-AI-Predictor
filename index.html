@@ -17,7 +17,6 @@
       --accent-green-glow: rgba(0, 230, 118, 0.35);
       --accent-cyan: #00d2ff;
       --accent-orange: #ff9800;
-      --accent-orange-hover: #e68a00;
       --text-main: #ffffff;
       --text-muted: #8e9aaf;
       --badge-bg: rgba(0, 230, 118, 0.1);
@@ -309,7 +308,7 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 8px 20px rgba(0, 230, 118, 0.3);
-      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      transition: transform 0.1s ease;
     }
 
     .btn-primary:active {
@@ -331,6 +330,11 @@
       justify-content: center;
       gap: 8px;
       text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-telegram:hover {
+      background: rgba(0, 136, 204, 0.25);
     }
 
     /* --- MODAL (1500 CFA DEPOSIT MANDATORY) --- */
@@ -416,6 +420,7 @@
       transition: transform 0.1s ease;
       text-decoration: none;
       display: block;
+      text-transform: uppercase;
     }
 
     .modal-btn-deposit:active {
@@ -518,7 +523,7 @@
     </button>
 
     <!-- TELEGRAM SUPPORT -->
-    <a href="https://t.me" target="_blank" class="btn-telegram">
+    <a href="https://t.me/Marty_CFA_bot" target="_blank" class="btn-telegram">
       ✈️ Telegram Support
     </a>
 
@@ -532,10 +537,10 @@
       <div class="modal-text">
         Pour synchroniser le robot Marty AI Predictor avec votre compte 1xBet Cameroun et générer les signaux, un dépôt minimum de <span class="deposit-amount">1500 CFA</span> est obligatoire sur votre compte.
       </div>
-      <!-- SINGLE MANDATORY BUTTON -->
-      <button class="modal-btn-deposit" onclick="redirectToDeposit()">
+      <!-- MANDATORY ORANGE DEPOSIT BUTTON REDIRECTING TO 1XBET CAMEROON -->
+      <a href="https://1xbet.cm" target="_blank" class="modal-btn-deposit">
         Faire un dépôt (1500 CFA)
-      </button>
+      </a>
     </div>
   </div>
 
@@ -553,11 +558,6 @@
       }
       // Shows ONLY the 1500 CFA deposit notification modal
       document.getElementById('depositModal').style.display = 'flex';
-    }
-
-    function redirectToDeposit() {
-      // Put your deposit / registration link here
-      window.location.href = "https://1xbet.cm";
     }
   </script>
 </body>
